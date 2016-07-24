@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>图表展示</title>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static',filename='js/bootstrap3.3.2/css/bootstrap.min.css') }}"/>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/echart-wordcloud.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.1.11.1.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static',filename='js/bootstrap3.3.2/js/bootstrap.min.js') }}"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center"><strong>爬取SegmentFault线下活动数据的可视化分析</strong></h2>
+        </div>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well" id="chart_1" style="height:600px;"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="well" id="chart_2" style="height:600px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well" id="chart_4" style="height:600px;"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="well" id="chart_3" style="height:600px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well" id="chart_5" style="height:600px;"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="well" id="chart_6" style="height:600px;"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var chart_1 = echarts.init(document.getElementById('chart_1'));
+    var chart_2 = echarts.init(document.getElementById('chart_2'));
+    var chart_3 = echarts.init(document.getElementById('chart_3'));
+    var chart_4 = echarts.init(document.getElementById('chart_4'));
+    var chart_5 = echarts.init(document.getElementById('chart_5'));
+
+    function createRandomItemStyle() {
+        return {
+            normal: {
+                color: 'rgb(' + [
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160)
+                ].join(',') + ')'
+            }
+        };
+    }
+
+
+    $(document).ready(function () {
+        var option_1 = {
+            title: {
+                text: '',
+                subtext: ''
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)",
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {
+                orient: 'horizontal',
+                y: 'bottom',
+                data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+            },
+            series: [
+                {
+                    name: '',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: []
+                }
+            ]
+
+        };
+        var option_2 = {
+            title: {
+                text: '异步数据加载示例'
+            },
+            tooltip: {},
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {
+                data: [],
+                y: 'bottom'
+            },
+            xAxis: {
+                type: 'category',
+                data: [],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            },
+            yAxis: {},
+            series: [{
+                name: '',
+                type: 'bar',
+                data: []
+            }]
+        };
+        var option_3 = {
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {
+                data: [],
+                y: 'bottom'
+            },
+            xAxis: {
+                type: 'category',
+                data: [],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            },
+            yAxis: {},
+            series: [{
+                name: '',
+                type: 'bar',
+                data: []
+            }]
+        };
+        var option_4 = {
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {
+                data: [],
+                y: 'bottom'
+            },
+            xAxis: {
+                type: 'category',
+                data: [],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            },
+            yAxis: {},
+            series: [{
+                name: '',
+                type: 'bar',
+                data: []
+            }]
+        };
+        option_5 = {
+            title: {
+                text: '',
+            },
+            tooltip: {
+                show: true
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            series: [{
+                name: '',
+                type: 'wordCloud',
+                size: ['100%', '100%'],
+                textRotation: [0, 45, 90, -45],
+                textPadding: 0,
+                autoSize: {
+                    enable: true,
+                    minSize: 14
+                },
+                data: []
+            }]
+        };
+
+        $.getJSON("/get_pie", function (json) {
+            option_1.legend.data = json.legend.data;
+            option_1.title.text = json.title.text;
+            option_1.title.subtext = json.title.subtext;
+            option_1.title.sublink = json.title.sublink;
+            option_1.series[0].name = json.series.name;
+            option_1.series[0].data = json.series.data;
+            chart_1.hideLoading();
+            chart_1.setOption(option_1);
+        });
+        $.getJSON("/get_count_per_year", function (json) {
+            option_2.legend.data = json.legend.data;
+            option_2.title.text = json.title.text;
+            option_2.title.subtext = json.title.subtext;
+            option_2.title.sublink = json.title.sublink;
+            option_2.xAxis.data = json.xAxis.data;
+            option_2.series[0].name = json.series.name;
+            option_2.series[0].data = json.series.data;
+            chart_2.hideLoading();
+            chart_2.setOption(option_2);
+        });
+
+        $.getJSON("/get_count_per_day", function (json) {
+            option_3.legend.data = json.legend.data;
+            option_3.title.text = json.title.text;
+            option_3.title.subtext = json.title.subtext;
+            option_3.title.sublink = json.title.sublink;
+            option_3.xAxis.data = json.xAxis.data;
+            option_3.series[0].name = json.series.name;
+            option_3.series[0].data = json.series.data;
+            chart_3.hideLoading();
+            chart_3.setOption(option_3);
+        });
+        $.getJSON("/get_count_per_month", function (json) {
+            option_4.legend.data = json.legend.data;
+            option_4.title.text = json.title.text;
+            option_4.title.subtext = json.title.subtext;
+            option_4.title.sublink = json.title.sublink;
+            option_4.xAxis.data = json.xAxis.data;
+            option_4.series[0].name = json.series.name;
+            option_4.series[0].data = json.series.data;
+            chart_4.hideLoading();
+            chart_4.setOption(option_4);
+        });
+        $.getJSON("/get_world_cloud", function (json) {
+            option_5.title.text = json.title.text;
+            option_5.title.subtext = json.title.subtext;
+            option_5.title.sublink = json.title.sublink;
+            option_5.series[0].name = json.series[0].name;
+            option_5.series[0].data = json.series[0].data;
+            chart_5.hideLoading();
+            chart_5.setOption(option_5);
+        });
+    });
+
+</script>
+</html>
