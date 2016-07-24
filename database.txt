@@ -1,0 +1,14 @@
+CREATE TABLE `blog`.`<table_name>` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(100) NOT NULL,
+	`c_date` varchar(20) NOT NULL,
+	`week` varchar(8) NOT NULL,
+	`week_number` int(11) NOT NULL,
+	`city` varchar(20) NOT NULL,
+	`icon` varchar(100) NOT NULL,
+	`status` varchar(10) NOT NULL,
+	`detail` varchar(100) NOT NULL,
+	`join_link` varchar(100) NOT NULL,
+	`link` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=`InnoDB` AUTO_INCREMENT=1708 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ROW_FORMAT=COMPACT CHECKSUM=0 DELAY_KEY_WRITE=0;
